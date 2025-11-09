@@ -50,51 +50,47 @@ fun EditProfile2Screen(navController: NavHostController, showDropdown: Boolean) 
                 .fillMaxSize()
                 .padding(horizontal = 22.dp, vertical = 22.dp)
                 .verticalScroll(rememberScrollState())
-        ) {
+        )
+        {
 
             // --- Glassy back button + Title ---
             Row(
                 verticalAlignment = Alignment.CenterVertically,
                 modifier = Modifier.padding(bottom = 20.dp)
             ) {
-                Box(
-                    modifier = Modifier
-                        .size(42.dp)
-                        .background(
-                            color = Color.White.copy(alpha = 0.15f),
-                            shape = CircleShape
-                        )
-                        .border(
-                            width = 1.5.dp,
-                            color = Color.White.copy(alpha = 0.30f),
-                            shape = CircleShape
-                        )
-                        .shadow(
-                            elevation = 8.dp,
-                            shape = CircleShape,
-                            ambientColor = Color.Black.copy(alpha = 0.1f),
-                            spotColor = Color.Black.copy(alpha = 0.15f)
-                        )
-                        .clickable { navController.popBackStack() },
-                    contentAlignment = Alignment.Center
-                ) {
-                    Icon(
-                        imageVector = Icons.Default.ArrowBack,
-                        contentDescription = "Back",
-                        tint = Color.White,
-                        modifier = Modifier.size(24.dp)
-                    )
-                }
+//                Box(
+//                    modifier = Modifier
+//                        .size(42.dp)
+//                        .background(
+//                            color = Color.White.copy(alpha = 0.15f),
+//                            shape = CircleShape
+//                        )
+//                        .border(
+//                            width = 1.5.dp,
+//                            color = Color.White.copy(alpha = 0.30f),
+//                            shape = CircleShape
+//                        )
+//                        .shadow(
+//                            elevation = 8.dp,
+//                            shape = CircleShape,
+//                            ambientColor = Color.Black.copy(alpha = 0.1f),
+//                            spotColor = Color.Black.copy(alpha = 0.15f)
+//                        )
+//                        .clickable { navController.popBackStack() },
+//                    contentAlignment = Alignment.Center
+////                ) {
+//                    Icon(
+//                        imageVector = Icons.Default.ArrowBack,
+//                        contentDescription = "Back",
+//                        tint = Color.White,
+//                        modifier = Modifier.size(24.dp)
+//                    )
+//                }
 
 
                 Spacer(modifier = Modifier.width(12.dp))
 
-                Text(
-                    text = "Edit Profil",
-                    color = PrimaryText,
-                    fontSize = 28.sp,
-                    fontWeight = FontWeight.Bold
-                )
+
             }
 
             // Question 1

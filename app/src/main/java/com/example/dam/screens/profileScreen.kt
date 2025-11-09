@@ -3,6 +3,8 @@ package com.example.dam.screens
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
@@ -19,36 +21,27 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.example.dam.R
 import com.example.dam.ui.theme.*
-import com.example.dam.ScreenWithDropdown
-
-
 
 @Composable
 fun ProfileScreen(
     navController: NavHostController,
     showDropdown: Boolean = false
 ) {
-    ScreenWithDropdown(
-        navController = navController,
-        title = "Profile",
-        showDropdown = showDropdown
-    ) { paddingValues ->
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .background(BackgroundDark)
-                .padding(paddingValues)
-        ) {
-            // Header avec profil
-            ProfileHeader(navController)
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(BackgroundDark)
+            .verticalScroll(rememberScrollState())
+    ) {
+        // Header avec profil
+        ProfileHeader(navController)
 
-            Spacer(modifier = Modifier.height(24.dp))
+        Spacer(modifier = Modifier.height(24.dp))
 
-            // Statistiques
-            StatisticsSection()
+        // Statistiques
+        StatisticsSection()
 
-            Spacer(modifier = Modifier.height(24.dp))
-        }
+        Spacer(modifier = Modifier.height(100.dp))
     }
 }
 

@@ -49,51 +49,16 @@ fun MapScreen(navController: NavHostController, showDropdown: Boolean) {
         mapView.controller.setCenter(center)
     }
 
-    Column(
+    // --- Carte plein écran ---
+    Box(
         modifier = Modifier
             .fillMaxSize()
             .background(BackgroundDark)
     ) {
-        // --- Header ---
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .background(Color(0xFF1E1E1E))
-                .padding(horizontal = 16.dp, vertical = 12.dp),
-            horizontalArrangement = Arrangement.SpaceBetween,
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            // Titre au centre
-            Text(
-                text = "Map",
-                color = TextPrimary,
-                fontSize = 20.sp,
-                modifier = Modifier.weight(1f),
-            )
-
-            // Bouton X à droite
-            IconButton(onClick = { navController.popBackStack() }) {
-                Icon(
-                    imageVector = Icons.Default.Close,
-                    contentDescription = "Close",
-                    tint = Color.White
-                )
-            }
-        }
-
-        // --- Carte ---
-        Box(
-            modifier = Modifier
-                .fillMaxWidth()
-                .weight(1f) // occupe tout l'espace disponible
-                .padding(bottom = 60.dp) // espace réservé pour la BottomNavbar
-        ) {
-            AndroidView(
-                factory = { mapView },
-                modifier = Modifier
-                    .fillMaxSize()
-            )
-        }
+        AndroidView(
+            factory = { mapView },
+            modifier = Modifier.fillMaxSize()
+        )
     }
 }
 

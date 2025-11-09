@@ -2,6 +2,8 @@ package com.example.dam.screens
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
@@ -31,35 +33,10 @@ fun NewChallengeScreen(
         modifier = Modifier
             .fillMaxSize()
             .background(BackgroundDark)
-            .statusBarsPadding()
-            .padding(20.dp)
+            .verticalScroll(rememberScrollState())
+            .padding(horizontal = 20.dp)
+            .padding(top = 16.dp, bottom = 20.dp)
     ) {
-        // Header avec titre et bouton close
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceBetween,
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-//            Column {
-//                Text(
-//                    text = "new challenge",
-//                    color = TextPrimary,
-//                    fontSize = 24.sp,
-//                    fontWeight = FontWeight.Bold
-//                )
-//            }
-
-            IconButton(onClick = onDismiss) {
-                Icon(
-                    imageVector = Icons.Default.Close,
-                    contentDescription = "Close",
-                    tint = TextPrimary
-                )
-            }
-        }
-
-        Spacer(modifier = Modifier.height(24.dp))
-
         // Section Departure & Arrival
         Row(
             modifier = Modifier.fillMaxWidth(),
@@ -152,13 +129,13 @@ fun NewChallengeScreen(
             }
         }
 
-        Spacer(modifier = Modifier.height(24.dp))
+        Spacer(modifier = Modifier.height(20.dp))
 
         // OpenStreetMap intégré
         Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(300.dp)
+                .height(280.dp)
         ) {
             Surface(
                 modifier = Modifier.fillMaxSize(),
@@ -241,14 +218,16 @@ fun NewChallengeScreen(
             )
         }
 
-        Spacer(modifier = Modifier.weight(1f))
+        Spacer(modifier = Modifier.height(20.dp))
 
         // Create button
         Button(
-            onClick = { /* TODO: Create challenge */ },
+            onClick = {
+                navController.navigate("map")
+            },
             modifier = Modifier
                 .fillMaxWidth()
-                .height(56.dp),
+                .height(52.dp),
             colors = ButtonDefaults.buttonColors(
                 containerColor = GreenAccent,
                 contentColor = Color.Black
@@ -262,7 +241,7 @@ fun NewChallengeScreen(
             )
         }
 
-        Spacer(modifier = Modifier.height(16.dp))
+        Spacer(modifier = Modifier.height(20.dp))
     }
 }
 

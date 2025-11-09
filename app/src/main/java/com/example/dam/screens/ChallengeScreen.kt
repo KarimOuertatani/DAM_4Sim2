@@ -62,41 +62,41 @@ fun ChallengeScreen(
                 .padding(horizontal = 22.dp, vertical = 22.dp)
         ) {
             // --- Glassy back button + Title ---
-            Row(
-                verticalAlignment = Alignment.CenterVertically,
-                modifier = Modifier.padding(bottom = 20.dp)
-            ) {
-                Box(
-                    modifier = Modifier
-                        .size(42.dp)
-                        .background(
-                            color = Color.White.copy(alpha = 0.15f),
-                            shape = CircleShape
-                        )
-                        .border(
-                            width = 1.5.dp,
-                            color = Color.White.copy(alpha = 0.30f),
-                            shape = CircleShape
-                        )
-                        .clickable { navController.popBackStack() },
-                    contentAlignment = Alignment.Center
-                ) {
-                    Icon(
-                        imageVector = Icons.Default.ArrowBack,
-                        contentDescription = "Back",
-                        tint = Color.White,
-                        modifier = Modifier.size(24.dp)
-                    )
-                }
+//            Row(
+//                verticalAlignment = Alignment.CenterVertically,
+//                modifier = Modifier.padding(bottom = 20.dp)
+////            ) {
+//                Box(
+//                    modifier = Modifier
+//                        .size(42.dp)
+//                        .background(
+//                            color = Color.White.copy(alpha = 0.15f),
+//                            shape = CircleShape
+//                        )
+//                        .border(
+//                            width = 1.5.dp,
+//                            color = Color.White.copy(alpha = 0.30f),
+//                            shape = CircleShape
+//                        )
+//                        .clickable { navController.popBackStack() },
+//                    contentAlignment = Alignment.Center
+//                ) {
+//                    Icon(
+//                        imageVector = Icons.Default.ArrowBack,
+//                        contentDescription = "Back",
+//                        tint = Color.White,
+//                        modifier = Modifier.size(24.dp)
+//                    )
+//                }
 
                 Spacer(modifier = Modifier.width(12.dp))
 
-                Text(
-                    text = "Challenge",
-                    color = Color.White,
-                    fontSize = 28.sp,
-                    fontWeight = FontWeight.Bold
-                )
+//                Text(
+//                    text = "Challenge",
+//                    color = Color.White,
+//                    fontSize = 28.sp,
+//                    fontWeight = FontWeight.Bold
+//                )
             }
 
             LazyColumn(
@@ -263,7 +263,7 @@ fun ChallengeScreen(
             }
         }
     }
-}
+
 
 @Composable
 fun DateSelector(

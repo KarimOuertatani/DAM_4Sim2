@@ -4,6 +4,8 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -13,6 +15,7 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -38,14 +41,14 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-// ================= SCAFFOLD PRINCIPAL AVEC BOTTOM NAV =================
+// ================= SCAFFOLD PRINCIPAL =================
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MainAppScaffold(navController: NavHostController) {
     val currentRoute = navController.currentBackStackEntryAsState().value?.destination?.route
 
-    // Liste des routes où on veut afficher le BottomNav
+    // Routes avec BottomNav
     val routesWithBottomNav = listOf(
         "main",
         "profile",
@@ -54,16 +57,27 @@ fun MainAppScaffold(navController: NavHostController) {
         "newchallenge"
     )
 
-    // Liste des routes où on veut afficher le TopBar avec dropdown
+    // Routes avec TopBar (titre + dropdown)
     val routesWithTopBar = listOf(
-        //"editProfile1",
-       // "editProfile2",
+        "profile",
+        "editProfile1",
+        "editProfile2",
         "newchallenge",
+        "map",
+
         "challenge"
+    )
+
+    // Routes avec bouton Back
+    val routesWithBackButton = listOf(
+        "challenge",
+        "editProfile1",
+        "editProfile2"
     )
 
     val showBottomNav = currentRoute in routesWithBottomNav
     val showTopBar = currentRoute in routesWithTopBar
+    val showBackButton = currentRoute in routesWithBackButton
 
     var dropdownExpanded by remember { mutableStateOf(false) }
 
@@ -74,24 +88,75 @@ fun MainAppScaffold(navController: NavHostController) {
         containerColor = BackgroundDark,
         topBar = {
             if (showTopBar) {
-                TopAppBar(
-                    title = {
-                        Text(
-                            text = when (currentRoute) {
-                                "editProfile1" -> "Edit Profile"
-                                "editProfile2" -> "Edit Profile"
-                                "newchallenge" -> "New Challenge"
-                                else -> ""
-                            },
-                            color = TextPrimary,
-                            fontSize = 20.sp,
-                            fontWeight = FontWeight.SemiBold
-                        )
-                    },
-                    colors = TopAppBarDefaults.topAppBarColors(
-                        containerColor = BackgroundDark
-                    ),
-                    actions = {
+                Surface(
+                    color = BackgroundDark,
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(horizontal = 22.dp, vertical = 16.dp),
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.SpaceBetween
+                    ) {
+                        // Left side: Back button + Title
+                        Row(
+                            verticalAlignment = Alignment.CenterVertically,
+                            modifier = Modifier.weight(1f)
+                        ) {
+                            // Glassy Back Button
+                            if (showBackButton) {
+                                Box(
+                                    modifier = Modifier
+                                        .size(42.dp)
+                                        .background(
+                                            color = Color.White.copy(alpha = 0.15f),
+                                            shape = CircleShape
+                                        )
+                                        .border(
+                                            width = 1.5.dp,
+                                            color = Color.White.copy(alpha = 0.30f),
+                                            shape = CircleShape
+                                        )
+                                        .shadow(
+                                            elevation = 8.dp,
+                                            shape = CircleShape,
+                                            ambientColor = Color.Black.copy(alpha = 0.1f),
+                                            spotColor = Color.Black.copy(alpha = 0.15f)
+                                        )
+                                        .clickable { navController.popBackStack() },
+                                    contentAlignment = Alignment.Center
+                                ) {
+                                    Icon(
+                                        imageVector = Icons.Default.ArrowBack,
+                                        contentDescription = "Back",
+                                        tint = Color.White,
+                                        modifier = Modifier.size(24.dp)
+                                    )
+                                }
+                                Spacer(modifier = Modifier.width(12.dp))
+                            }
+
+                            // Title
+                            Text(
+                                text = when (currentRoute) {
+                                    "profile" -> "Profile"
+                                    "editProfile1" -> "Edit Profile"
+                                    "editProfile2" -> "Edit Profile"
+                                    "challenge" -> "Challenge"
+                                    "newchallenge" -> "New Challenge"
+                                    "map" -> "Map"
+
+
+                                    else -> ""
+                                },
+                                color = TextPrimary,
+                                fontSize = 28.sp,
+                                fontWeight = FontWeight.Bold
+                            )
+                        }
+
+                        // Right side: Dropdown Menu
                         Box {
                             DropdownChevron(onClick = { dropdownExpanded = true })
                             ProfileDropdownMenu(
@@ -101,7 +166,7 @@ fun MainAppScaffold(navController: NavHostController) {
                             )
                         }
                     }
-                )
+                }
             }
         },
         bottomBar = {
@@ -158,7 +223,6 @@ fun AppNavigation(navController: NavHostController) {
                 showDropdown = true
             )
         }
-
         composable("map") {
             MapScreen(
                 navController = navController,
@@ -196,91 +260,6 @@ fun MainScreen() {
                 fontSize = 14.sp
             )
         }
-    }
-}
-
-@Composable
-fun HomeScreen() {
-    Box(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(BackgroundDark),
-        contentAlignment = Alignment.Center
-    ) {
-        Column(
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.spacedBy(16.dp)
-        ) {
-            Text(text = "🏠", fontSize = 64.sp)
-            Text(text = "Home Screen", color = TextPrimary, fontSize = 24.sp)
-        }
-    }
-}
-
-@Composable
-fun CommunityScreen() {
-    Box(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(BackgroundDark),
-        contentAlignment = Alignment.Center
-    ) {
-        Column(
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.spacedBy(16.dp)
-        ) {
-            Text(text = "➕", fontSize = 64.sp)
-            Text(text = "Community Screen", color = TextPrimary, fontSize = 24.sp)
-        }
-    }
-}
-
-// ================= SCREEN WITH DROPDOWN =================
-
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-fun ScreenWithDropdown(
-    navController: NavHostController,
-    title: String,
-    showDropdown: Boolean = false,
-    content: @Composable (PaddingValues) -> Unit
-) {
-    var dropdownExpanded by remember { mutableStateOf(false) }
-
-    Scaffold(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(BackgroundDark),
-        containerColor = BackgroundDark,
-        topBar = {
-            TopAppBar(
-                title = {
-                    Text(
-                        text = title,
-                        color = TextPrimary,
-                        fontSize = 20.sp,
-                        fontWeight = FontWeight.SemiBold
-                    )
-                },
-                colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = BackgroundDark
-                ),
-                actions = {
-                    if (showDropdown) {
-                        Box {
-                            DropdownChevron(onClick = { dropdownExpanded = true })
-                            ProfileDropdownMenu(
-                                expanded = dropdownExpanded,
-                                onDismiss = { dropdownExpanded = false },
-                                navController = navController
-                            )
-                        }
-                    }
-                }
-            )
-        }
-    ) { paddingValues ->
-        content(paddingValues)
     }
 }
 
@@ -401,7 +380,7 @@ fun ProfileDropdownMenu(
     }
 }
 
-// ================= CHEVRON (AGRANDI) =================
+// ================= CHEVRON =================
 
 @Composable
 fun DropdownChevron(
@@ -421,14 +400,13 @@ fun DropdownChevron(
     }
 }
 
-// ================= BOTTOM NAV (DYNAMIQUE) =================
+// ================= BOTTOM NAV =================
 
 @Composable
 fun BottomNavigationBar(
     currentRoute: String,
     navController: NavHostController
 ) {
-    // Mapper les routes vers les tabs
     val routeToTab = mapOf(
         "main" to 0,
         "profile" to 3,

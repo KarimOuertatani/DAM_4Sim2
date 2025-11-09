@@ -59,48 +59,48 @@ fun EditProfile1Screen(navController: NavHostController, showDropdown: Boolean) 
         ) {
 
             // --- Glassy back button + Title ---
-            Row(
-                verticalAlignment = Alignment.CenterVertically,
-                modifier = Modifier.padding(bottom = 20.dp)
-            ) {
-                Box(
-                    modifier = Modifier
-                        .size(42.dp)
-                        .background(
-                            color = Color.White.copy(alpha = 0.15f),
-                            shape = CircleShape
-                        )
-                        .border(
-                            width = 1.5.dp,
-                            color = Color.White.copy(alpha = 0.30f),
-                            shape = CircleShape
-                        )
-                        .shadow(
-                            elevation = 8.dp,
-                            shape = CircleShape,
-                            ambientColor = Color.Black.copy(alpha = 0.1f),
-                            spotColor = Color.Black.copy(alpha = 0.15f)
-                        )
-                        .clickable { navController.popBackStack() },
-                    contentAlignment = Alignment.Center
-                ) {
-                    Icon(
-                        imageVector = Icons.Default.ArrowBack,
-                        contentDescription = "Back",
-                        tint = Color.White,
-                        modifier = Modifier.size(24.dp)
-                    )
-                }
-
-                Spacer(modifier = Modifier.width(12.dp))
-
-                Text(
-                    text = "Edit Profile",
-                    color = PrimaryTextColor,
-                    fontSize = 28.sp,
-                    fontWeight = FontWeight.Bold
-                )
-            }
+//            Row(
+//                verticalAlignment = Alignment.CenterVertically,
+//                modifier = Modifier.padding(bottom = 20.dp)
+//            ) {
+//                Box(
+//                    modifier = Modifier
+//                        .size(42.dp)
+//                        .background(
+//                            color = Color.White.copy(alpha = 0.15f),
+//                            shape = CircleShape
+//                        )
+//                        .border(
+//                            width = 1.5.dp,
+//                            color = Color.White.copy(alpha = 0.30f),
+//                            shape = CircleShape
+//                        )
+//                        .shadow(
+//                            elevation = 8.dp,
+//                            shape = CircleShape,
+//                            ambientColor = Color.Black.copy(alpha = 0.1f),
+//                            spotColor = Color.Black.copy(alpha = 0.15f)
+//                        )
+//                        .clickable { navController.popBackStack() },
+//                    contentAlignment = Alignment.Center
+//                ) {
+//                    Icon(
+//                        imageVector = Icons.Default.ArrowBack,
+//                        contentDescription = "Back",
+//                        tint = Color.White,
+//                        modifier = Modifier.size(24.dp)
+//                    )
+//                }
+//
+//                Spacer(modifier = Modifier.width(12.dp))
+//
+//                Text(
+//                    text = "Edit Profile",
+//                    color = PrimaryTextColor,
+//                    fontSize = 28.sp,
+//                    fontWeight = FontWeight.Bold
+//                )
+//            }
 
             // --- Form Fields ---
             Label("First Name")
