@@ -2,8 +2,6 @@
 //  LoginView.swift
 //  VIBRA
 //
-//  Created by mac book pro on 11/6/25.
-//
 
 import SwiftUI
 
@@ -15,16 +13,13 @@ struct LoginView: View {
     var body: some View {
         NavigationStack {
             ZStack {
-                // MARK: Background
                 Image("login_bg")
                     .resizable()
                     .scaledToFill()
                     .ignoresSafeArea()
                 
-                Color.black.opacity(0.55)
-                    .ignoresSafeArea()
+                Color.black.opacity(0.55).ignoresSafeArea()
                 
-                // MARK: Main Content
                 VStack {
                     Spacer(minLength: 100)
                     
@@ -73,7 +68,7 @@ struct LoginView: View {
                                 
                                 Spacer()
                                 
-                                NavigationLink(destination: ForgotPasswordView()) {
+                                NavigationLink(destination: ResetPasswordFlowView()) {
                                     Text("Forgot password?")
                                         .foregroundColor(.green)
                                 }
@@ -84,7 +79,7 @@ struct LoginView: View {
                         // MARK: Login Button
                         Button {
                             Task {
-                                await viewModel.login()
+                                await viewModel.login(stayConnected: rememberMe)
                             }
                         } label: {
                             if viewModel.isLoading {
@@ -156,6 +151,9 @@ struct LoginView: View {
                 }
                 .opacity(0)
             }
+        }
+        .onAppear {
+            viewModel.checkIfAlreadyLoggedIn()
         }
     }
     

@@ -4,6 +4,7 @@
 //
 //  Created by mac book pro on 11/7/25.
 //
+
 import Foundation
 
 // MARK: - AuthService
@@ -57,11 +58,10 @@ final class AuthService {
         request.httpMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         
-        // Body JSON correspond exactement au DTO NestJS
         var body: [String: Any] = [
             "firstName": firstName,
             "lastName": lastName,
-            "Gender": gender, // ✅ majuscule pour correspondre au backend
+            "Gender": gender, // ✅ correspond au backend
             "email": email,
             "password": password
         ]
@@ -85,4 +85,85 @@ final class AuthService {
         
         return try JSONDecoder().decode(User.self, from: data)
     }
+    
+    // MARK: - FORGOT PASSWORD
+    func forgotPassword(email: String) async throws -> ServerMessage {
+        guard let url = URL(string: "\(Constants.baseURL)/auth/forgot-password") else {
+            throw URLError(.badURL)
+        }
+        
+        let body = ["email": email]
+        return try await performPostRequest(url: url, body: body)
+    }
+    
+    // MARK: - VERIFY RESET CODE
+    func verifyResetCode(email: String, code: String) async throws -> ServerMessage {
+        guard let url = URL(string: "\(Constants.baseURL)/auth/verify-reset-code") else {
+            throw URLError(.badURL)
+        }
+        
+        let body = ["email": email, "code": code]
+        return try await performPostRequest(url: url, body: body)
+    }
+    
+    // MARK: - RESET PASSWORD
+    func resetPassword(email: String, code: String, newPassword: String) async throws -> ServerMessage {
+        guard let url = URL(string: "\(Constants.baseURL)/auth/reset-password") else {
+            throw URLError(.badURL)
+        }
+        
+        let body = ["email": email, "code": code, "newPassword": newPassword]
+        return try await performPostRequest(url: url, body: body)
+    }
+    
+    // MARK: - GENERIC POST
+    private func performPostRequest(url: URL, body: [String: String]) async throws -> ServerMessage {
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.httpBody = try JSONEncoder().encode(body)
+        
+        let (data, response) = try await URLSession.shared.data(for: request)
+        
+        guard let httpResponse = response as? HTTPURLResponse,
+              (200...299).contains(httpResponse.statusCode) else {
+            let serverMessage = String(data: data, encoding: .utf8) ?? "Unknown error"
+            print("❌ Server error: \(serverMessage)")
+            throw URLError(.badServerResponse)
+        }
+        
+        return try JSONDecoder().decode(ServerMessage.self, from: data)
+    }
+    // MARK: - get user by id
+    func getUser(byId id: String) async throws -> User {
+            guard let url = URL(string: "\(Constants.baseURL)/user/\(id)") else {
+                throw URLError(.badURL)
+            }
+            
+            var request = URLRequest(url: url)
+            request.httpMethod = "GET"
+            request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+            
+            // Ajouter le token si disponible
+            if let token = try? KeychainManager.shared.getJWT() {
+                request.addValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+            }
+            
+            let (data, response) = try await URLSession.shared.data(for: request)
+            
+            guard let httpResponse = response as? HTTPURLResponse,
+                  (200...299).contains(httpResponse.statusCode) else {
+                let serverMessage = String(data: data, encoding: .utf8) ?? "Unknown error"
+                print("❌ Server error: \(serverMessage)")
+                throw URLError(.badServerResponse)
+            }
+            
+            return try JSONDecoder().decode(User.self, from: data)
+        }
 }
+
+// MARK: - Response Models
+struct ServerMessage: Codable {
+    let message: String
+}
+
