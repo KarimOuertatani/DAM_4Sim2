@@ -6,15 +6,8 @@
 	objectVersion = 77;
 	objects = {
 
-/* Begin PBXBuildFile section */
-		CB394501DFB96A32471FD729 /* Pods_VIBRA.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4138014665F8102F9767B586 /* Pods_VIBRA.framework */; };
-/* End PBXBuildFile section */
-
 /* Begin PBXFileReference section */
-		4138014665F8102F9767B586 /* Pods_VIBRA.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VIBRA.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		7B0C5AA2C82D9DFBD11C000E /* Pods-VIBRA.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VIBRA.release.xcconfig"; path = "Target Support Files/Pods-VIBRA/Pods-VIBRA.release.xcconfig"; sourceTree = "<group>"; };
-		DDA0F158D236B311EE801E95 /* Pods-VIBRA.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VIBRA.debug.xcconfig"; path = "Target Support Files/Pods-VIBRA/Pods-VIBRA.debug.xcconfig"; sourceTree = "<group>"; };
-		FD03B3BA2EBCAAFB000C804D /* VIBRA.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VIBRA.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		FDD224F82EC14BFA00CBFCA7 /* VIBRA.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = VIBRA.app; path = "/Users/book/Documents/swift/VIBRA/build/Debug-iphoneos/VIBRA.app"; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -43,47 +36,17 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CB394501DFB96A32471FD729 /* Pods_VIBRA.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		A03801849FB4EB4E22568409 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				4138014665F8102F9767B586 /* Pods_VIBRA.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		FA2C496D926675FE1F84C9DE /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				DDA0F158D236B311EE801E95 /* Pods-VIBRA.debug.xcconfig */,
-				7B0C5AA2C82D9DFBD11C000E /* Pods-VIBRA.release.xcconfig */,
-			);
-			name = Pods;
-			path = Pods;
-			sourceTree = "<group>";
-		};
 		FD03B3B12EBCAAFB000C804D = {
 			isa = PBXGroup;
 			children = (
 				FD03B3BC2EBCAAFB000C804D /* VIBRA */,
-				FD03B3BB2EBCAAFB000C804D /* Products */,
-				FA2C496D926675FE1F84C9DE /* Pods */,
-				A03801849FB4EB4E22568409 /* Frameworks */,
 			);
-			sourceTree = "<group>";
-		};
-		FD03B3BB2EBCAAFB000C804D /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				FD03B3BA2EBCAAFB000C804D /* VIBRA.app */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -93,11 +56,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = FD03B3CA2EBCAAFC000C804D /* Build configuration list for PBXNativeTarget "VIBRA" */;
 			buildPhases = (
-				BA1FD9A896686B6CDCDA992A /* [CP] Check Pods Manifest.lock */,
 				FD03B3B62EBCAAFB000C804D /* Sources */,
 				FD03B3B72EBCAAFB000C804D /* Frameworks */,
 				FD03B3B82EBCAAFB000C804D /* Resources */,
-				D9D8765B10D1C943198E528B /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -108,7 +69,7 @@
 			);
 			name = VIBRA;
 			productName = VIBRA;
-			productReference = FD03B3BA2EBCAAFB000C804D /* VIBRA.app */;
+			productReference = FDD224F82EC14BFA00CBFCA7 /* VIBRA.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -136,7 +97,7 @@
 			mainGroup = FD03B3B12EBCAAFB000C804D;
 			minimizedProjectReferenceProxies = 1;
 			preferredProjectObjectVersion = 77;
-			productRefGroup = FD03B3BB2EBCAAFB000C804D /* Products */;
+			productRefGroup = FD03B3B12EBCAAFB000C804D;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
@@ -154,48 +115,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		BA1FD9A896686B6CDCDA992A /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-VIBRA-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		D9D8765B10D1C943198E528B /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-VIBRA/Pods-VIBRA-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-VIBRA/Pods-VIBRA-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-VIBRA/Pods-VIBRA-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		FD03B3B62EBCAAFB000C804D /* Sources */ = {
@@ -329,7 +248,6 @@
 		};
 		FD03B3CB2EBCAAFC000C804D /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = DDA0F158D236B311EE801E95 /* Pods-VIBRA.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -364,7 +282,6 @@
 		};
 		FD03B3CC2EBCAAFC000C804D /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7B0C5AA2C82D9DFBD11C000E /* Pods-VIBRA.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
