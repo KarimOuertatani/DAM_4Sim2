@@ -245,7 +245,9 @@ fun ChallengeScreen(
                 // Participate Button
                 item {
                     Button(
-                        onClick = { },
+                        onClick = {
+                            navController.navigate("course")
+                        },
                         modifier = Modifier
                             .fillMaxWidth()
                             .height(50.dp),

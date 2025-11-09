@@ -40,7 +40,6 @@ fun EditProfile1Screen(navController: NavHostController, showDropdown: Boolean) 
     var lastName by remember { mutableStateOf("") }
     var birthDate by remember { mutableStateOf("") }
     var age by remember { mutableStateOf("") }
-    var gender by remember { mutableStateOf("") }
 
     // DatePicker state
     var showDatePicker by remember { mutableStateOf(false) }
@@ -57,51 +56,6 @@ fun EditProfile1Screen(navController: NavHostController, showDropdown: Boolean) 
                 .padding(horizontal = 22.dp, vertical = 22.dp)
                 .verticalScroll(rememberScrollState())
         ) {
-
-            // --- Glassy back button + Title ---
-//            Row(
-//                verticalAlignment = Alignment.CenterVertically,
-//                modifier = Modifier.padding(bottom = 20.dp)
-//            ) {
-//                Box(
-//                    modifier = Modifier
-//                        .size(42.dp)
-//                        .background(
-//                            color = Color.White.copy(alpha = 0.15f),
-//                            shape = CircleShape
-//                        )
-//                        .border(
-//                            width = 1.5.dp,
-//                            color = Color.White.copy(alpha = 0.30f),
-//                            shape = CircleShape
-//                        )
-//                        .shadow(
-//                            elevation = 8.dp,
-//                            shape = CircleShape,
-//                            ambientColor = Color.Black.copy(alpha = 0.1f),
-//                            spotColor = Color.Black.copy(alpha = 0.15f)
-//                        )
-//                        .clickable { navController.popBackStack() },
-//                    contentAlignment = Alignment.Center
-//                ) {
-//                    Icon(
-//                        imageVector = Icons.Default.ArrowBack,
-//                        contentDescription = "Back",
-//                        tint = Color.White,
-//                        modifier = Modifier.size(24.dp)
-//                    )
-//                }
-//
-//                Spacer(modifier = Modifier.width(12.dp))
-//
-//                Text(
-//                    text = "Edit Profile",
-//                    color = PrimaryTextColor,
-//                    fontSize = 28.sp,
-//                    fontWeight = FontWeight.Bold
-//                )
-//            }
-
             // --- Form Fields ---
             Label("First Name")
             RoundedInputField(firstName, { firstName = it })
@@ -148,39 +102,36 @@ fun EditProfile1Screen(navController: NavHostController, showDropdown: Boolean) 
 
             Spacer(modifier = Modifier.height(12.dp))
 
-            Label("Age")
+            Label("Email adress")
             RoundedInputField(
                 age,
                 { age = it },
-                hint = "Age"
+                hint = "syrine@gmail.com"
             )
 
-            Spacer(modifier = Modifier.height(16.dp))
+            Spacer(modifier = Modifier.height(12.dp))
 
             Label("Gender")
-            Spacer(modifier = Modifier.height(6.dp))
-
-            val genders = listOf("Man", "Woman", "Non-binary")
-            genders.forEach { g ->
-                Row(
-                    verticalAlignment = Alignment.CenterVertically,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(vertical = 6.dp)
-                        .clickable { gender = g }
-                ) {
-                    RadioButton(
-                        selected = gender == g,
-                        onClick = { gender = g },
-                        colors = RadioButtonDefaults.colors(
-                            selectedColor = AccentGreen,
-                            unselectedColor = SecondaryTextColor
-                        )
-                    )
-                    Spacer(modifier = Modifier.width(8.dp))
-                    Text(text = g, color = PrimaryTextColor, fontSize = 15.sp)
-                }
-            }
+            // Gender Field (readonly)
+            OutlinedTextField(
+                value = "Woman",
+                onValueChange = {},
+                readOnly = true,
+                textStyle = LocalTextStyle.current.copy(color = Color.White),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(52.dp),
+                shape = RoundedCornerShape(12.dp),
+                colors = OutlinedTextFieldDefaults.colors(
+                    focusedTextColor = Color.White,
+                    unfocusedTextColor = Color.White,
+                    focusedBorderColor = AccentGreen,
+                    unfocusedBorderColor = SecondaryTextColor,
+                    cursorColor = AccentGreen,
+                    disabledTextColor = Color.White,
+                    disabledBorderColor = SecondaryTextColor
+                )
+            )
 
             Spacer(modifier = Modifier.height(30.dp))
 

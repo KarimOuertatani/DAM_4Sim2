@@ -235,6 +235,13 @@ fun AppNavigation(navController: NavHostController) {
                 showDropdown = false
             )
         }
+
+        composable("course") {
+            CourseDetailsScreen(
+                navController = navController,
+                showDropdown = false
+            )
+        }
     }
 }
 
