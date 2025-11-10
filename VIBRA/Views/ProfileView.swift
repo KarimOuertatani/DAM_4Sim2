@@ -57,18 +57,18 @@ struct ProfileView: View {
                                 .foregroundColor(.gray)
                                 .font(.subheadline)
                             
-                            Button(action: {}) {
-                                HStack {
-                                    Image(systemName: "square.and.pencil")
-                                    Text("Edit Profile")
+                            NavigationLink(destination: ProfileUpdateView()) {
+                                    HStack {
+                                        Image(systemName: "square.and.pencil")
+                                        Text("Edit Profile")
+                                    }
+                                    .font(.system(size: 14, weight: .medium))
+                                    .padding(.horizontal, 20)
+                                    .padding(.vertical, 8)
+                                    .background(Color.green)
+                                    .foregroundColor(.black)
+                                    .cornerRadius(8)
                                 }
-                                .font(.system(size: 14, weight: .medium))
-                                .padding(.horizontal, 20)
-                                .padding(.vertical, 8)
-                                .background(Color.green)
-                                .foregroundColor(.black)
-                                .cornerRadius(8)
-                            }
                             .padding(.top, 8)
                         }
                         .padding(.top, 40)

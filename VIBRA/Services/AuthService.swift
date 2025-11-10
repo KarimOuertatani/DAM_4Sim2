@@ -160,6 +160,23 @@ final class AuthService {
             
             return try JSONDecoder().decode(User.self, from: data)
         }
+    // MARK: - UPDATE USER
+        func updateUser(userId: String, updatedUser: UpdateUserRequest) async throws -> User {
+            guard let url = URL(string: "\(Constants.baseURL)/user/\(userId)") else { throw URLError(.badURL) }
+            var request = URLRequest(url: url)
+            request.httpMethod = "PATCH"
+            request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+            if let token = try? KeychainManager.shared.getJWT() {
+                request.addValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+            }
+            request.httpBody = try JSONEncoder().encode(updatedUser)
+            let (data, response) = try await URLSession.shared.data(for: request)
+            guard let httpResponse = response as? HTTPURLResponse, (200...299).contains(httpResponse.statusCode) else {
+                let serverMessage = String(data: data, encoding: .utf8) ?? "Unknown error"
+                throw URLError(.badServerResponse)
+            }
+            return try JSONDecoder().decode(User.self, from: data)
+        }
 }
 
 // MARK: - Response Models
@@ -167,3 +184,12 @@ struct ServerMessage: Codable {
     let message: String
 }
 
+// MARK: - DTO pour update
+struct UpdateUserRequest: Codable {
+    var firstName: String
+    var lastName: String
+    var gender: String
+    var email: String
+    var avatar: String?
+    var password: String
+}

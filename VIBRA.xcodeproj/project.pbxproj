@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXFileReference section */
-		FDD224F82EC14BFA00CBFCA7 /* VIBRA.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = VIBRA.app; path = "/Users/book/Documents/swift/VIBRA/build/Debug-iphoneos/VIBRA.app"; sourceTree = "<absolute>"; };
+		FDEE22E92EC154AB0012D704 /* VIBRA.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VIBRA.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -46,6 +46,7 @@
 			isa = PBXGroup;
 			children = (
 				FD03B3BC2EBCAAFB000C804D /* VIBRA */,
+				FDEE22E92EC154AB0012D704 /* VIBRA.app */,
 			);
 			sourceTree = "<group>";
 		};
@@ -69,7 +70,7 @@
 			);
 			name = VIBRA;
 			productName = VIBRA;
-			productReference = FDD224F82EC14BFA00CBFCA7 /* VIBRA.app */;
+			productReference = FDEE22E92EC154AB0012D704 /* VIBRA.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
