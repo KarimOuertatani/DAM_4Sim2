@@ -284,8 +284,8 @@ fun ProfileDropdownMenu(
         onDismissRequest = onDismiss,
         modifier = modifier
             .background(Color(0xFF1F1F1F))
-            .padding(vertical = 8.dp),
-        shape = RoundedCornerShape(12.dp)
+            .padding(vertical = 8.dp)
+//        shape = RoundedCornerShape(12.dp)
     ) {
         // Profile
         DropdownMenuItem(
