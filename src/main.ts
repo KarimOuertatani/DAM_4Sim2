@@ -8,7 +8,12 @@ dotenv.config();
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  app.useGlobalPipes(new ValidationPipe({ whitelist: true, transform: true }));
+
+   // ✅ AJOUTEZ CECI
+  app.useGlobalPipes(new ValidationPipe({
+    whitelist: true,
+    transform: true,
+  }));
   app.useGlobalFilters(new HttpExceptionFilter());
 
   // Swagger setup

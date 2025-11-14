@@ -5,7 +5,6 @@ export class CreatePreferencesDto {
   @IsOptional() @IsEnum(['BEGINNER', 'INTERMEDIATE', 'ADVANCED'] as const)
   level?: 'BEGINNER' | 'INTERMEDIATE' | 'ADVANCED';
 
- 
    // ---- VÉLO ----
   @IsOptional()
   @IsEnum(['VTT', 'ROUTE', 'GRAVEL', 'URBAIN', 'ELECTRIQUE'] as const)

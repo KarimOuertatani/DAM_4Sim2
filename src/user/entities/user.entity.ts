@@ -33,6 +33,9 @@ export class User {
     @Prop({ type: Date, required: false })
     resetCodeExpires?: Date;
 
+     @Prop({ type: Date, required: false })
+    birthday?: Date;
+
 }
 
 //TS version
