@@ -28,6 +28,9 @@ export class Sortie {
   })
   createurId: Types.ObjectId;
 
+ @Prop({ required: false })
+  photo?: string;
+ 
   @Prop({
     type: Types.ObjectId,
     ref: 'Camping',
@@ -39,7 +42,7 @@ export class Sortie {
   capacite?: number;
 
   @Prop({
-    required: true,
+    required: false,
     type: {
       pointDepart: {
         latitude: { type: Number, required: true },
@@ -60,7 +63,7 @@ export class Sortie {
       instructions: { type: [String], required: false },
     },
   })
-  itineraire: {
+  itineraire?: {
     pointDepart: {
       latitude: number;
       longitude: number;

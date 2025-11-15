@@ -17,6 +17,10 @@ export class Camping {
   @Prop({ required: false })
   prix?: number;
 
+
+   @Prop({ required: false })
+  participants?: number;
+  
   @Prop({ required: true })
   dateDebut: Date;
 

@@ -15,6 +15,12 @@ export class CreateCampingDto {
   @IsNumber()
   prix?: number;
 
+
+
+  @IsOptional()
+  @IsNumber()
+  participants?: number;
+
   @IsDateString()
   dateDebut: string;
 

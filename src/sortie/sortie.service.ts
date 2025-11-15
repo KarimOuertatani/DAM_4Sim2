@@ -11,6 +11,9 @@ import { CreateSortieDto, UpdateSortieDto } from './dto/sortie.dto';
 import { SortieType } from '../enums/sortie-type.enum';
 import { CampingService } from '../camping/camping.service';
 import { CreateCampingDto } from '../camping/camping.dto';
+import cloudinary from 'src/config/cloudinary.config';
+import * as streamifier from 'streamifier';
+
 
 @Injectable()
 export class SortieService {
@@ -19,9 +22,35 @@ export class SortieService {
     private campingService: CampingService,
   ) {}
 
-  async create(
+
+
+
+ async uploadToCloudinary(file: Express.Multer.File): Promise<string> {
+    return new Promise((resolve, reject) => {
+      const uploadStream = cloudinary.uploader.upload_stream(
+        { folder: 'sorties' }, // Different folder from avatars
+        (error, result) => {
+          if (error) return reject(error);
+          if (!result || !result.secure_url) {
+            return reject(new Error('Cloudinary upload failed or returned no URL'));
+          }
+          resolve(result.secure_url);
+        },
+      );
+      streamifier.createReadStream(file.buffer)
+        .on('error', reject)
+        .pipe(uploadStream);
+    });
+  }
+
+
+
+
+
+async create(
     createSortieDto: CreateSortieDto,
     userId: string,
+    file?: Express.Multer.File, // ✅ ADD THIS PARAMETER
   ): Promise<SortieDocument> {
     const { type, option_camping, campingId, camping, ...rest } =
       createSortieDto;
@@ -51,14 +80,18 @@ export class SortieService {
 
     let campingId_resolved: Types.ObjectId | null = null;
 
-    // Handle camping DTO: create new camping
     if (camping) {
       const createdCamping = await this.campingService.create(camping);
       campingId_resolved = new Types.ObjectId(String(createdCamping._id));
     } else if (campingId) {
-      // Validate camping exists
       await this.campingService.findOne(campingId);
       campingId_resolved = new Types.ObjectId(campingId);
+    }
+
+    // ✅ ADD THIS: Handle photo upload
+    let photoUrl: string | undefined;
+    if (file) {
+      photoUrl = await this.uploadToCloudinary(file);
     }
 
     const sortieData = {
@@ -68,6 +101,7 @@ export class SortieService {
       createurId: new Types.ObjectId(userId),
       camping: campingId_resolved,
       participants: [],
+      photo: photoUrl, // ✅ ADD THIS
     };
 
     const sortie = new this.sortieModel(sortieData);
@@ -196,4 +230,29 @@ export class SortieService {
     const sortie = await this.sortieModel.findById(sortieId).exec();
     return sortie?.participants?.length || 0;
   }
+
+async setPhoto(id: string, file: Express.Multer.File, userId: string): Promise<SortieDocument> {
+    const sortie = await this.sortieModel.findById(id).exec();
+    if (!sortie) {
+      throw new NotFoundException('Sortie not found');
+    }
+
+    // Check authorization
+    if (sortie.createurId.toString() !== userId) {
+      throw new ForbiddenException('Only the creator can update the photo');
+    }
+
+    const photoUrl = await this.uploadToCloudinary(file);
+
+    const updated = await this.sortieModel
+      .findByIdAndUpdate(id, { photo: photoUrl }, { new: true })
+      .exec();
+
+    if (!updated) throw new NotFoundException('Sortie not found after update');
+
+    return updated;
+  }
+
+
+
 }
